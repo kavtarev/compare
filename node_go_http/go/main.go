@@ -15,9 +15,9 @@ func main() {
 		return
 	}
 
-	http.HandleFunc("/json-stringify", handlers.ClosureJson(os.Args[1]))
-	http.HandleFunc("/download-file", handlers.ClosureReadFileHandlerChunk(os.Args[1]))
-	http.HandleFunc("/parse-xml", handlers.ClosureXmlHandler(os.Args[1]))
+	http.HandleFunc("/json-stringify", handlers.JsonHandler(os.Args[1]))
+	http.HandleFunc("/download-file", handlers.ReadFileChunkHandler(os.Args[1]))
+	http.HandleFunc("/parse-xml", handlers.XmlHandler(os.Args[1]))
 
 	http.ListenAndServe(":3000", nil)
 }

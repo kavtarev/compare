@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func ClosureJson(name string) func(w http.ResponseWriter, req *http.Request) {
+func JsonHandler(name string) func(w http.ResponseWriter, req *http.Request) {
 	file, err := os.ReadFile("../common/json/" + name + ".json")
 	if err != nil {
 		panic("no file found")

@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func ClosureReadFileHandlerChunk(name string) func(w http.ResponseWriter, req *http.Request) {
+func ReadFileChunkHandler(name string) func(w http.ResponseWriter, req *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const size = 50000
 
