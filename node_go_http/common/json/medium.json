@@ -1,0 +1,30 @@
+{
+  "greet": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam, nesciunt libero veritatis ipsa vel sapiente aliquid eveniet saepe obcaecati eum, voluptatum id officia accusamus in recusandae magni maiores. Unde, tenetur!",
+  "sum1": 1000000,
+  "sum2": 2000000,
+  "sum3": 3000000,
+  "sum4": 4000000,
+  "array1": [1,2,3,4,5,6,7,8,9,0],
+  "array2": [10,20,30,40,50,60,70,80,90,0],
+  "array3": [100000,200000,300000,400000,500000,600000,700000,800000,900000,0],
+  "obj1": {
+    "some": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam, nesciunt libero veritatis ipsa vel sapiente aliquid eveniet saepe obcaecati eum, voluptatum id officia accusamus in recusandae magni maiores. Unde, tenetur!",
+    "other": 10000000,
+    "array": [100000,200000,300000,400000,500000,600000,700000,800000,900000,0]
+  },
+  "obj2": {
+    "some": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam, nesciunt libero veritatis ipsa vel sapiente aliquid eveniet saepe obcaecati eum, voluptatum id officia accusamus in recusandae magni maiores. Unde, tenetur!",
+    "other": 10000000,
+    "array": [100000,200000,300000,400000,500000,600000,700000,800000,900000,0]
+  },
+  "obj3": {
+    "some": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam, nesciunt libero veritatis ipsa vel sapiente aliquid eveniet saepe obcaecati eum, voluptatum id officia accusamus in recusandae magni maiores. Unde, tenetur!",
+    "other": 10000000,
+    "array": [100000,200000,300000,400000,500000,600000,700000,800000,900000,0]
+  },
+  "obj4": {
+    "some": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam, nesciunt libero veritatis ipsa vel sapiente aliquid eveniet saepe obcaecati eum, voluptatum id officia accusamus in recusandae magni maiores. Unde, tenetur!",
+    "other": 10000000,
+    "array": [100000,200000,300000,400000,500000,600000,700000,800000,900000,0]
+  }
+}

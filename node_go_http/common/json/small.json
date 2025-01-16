@@ -1,0 +1,6 @@
+{
+  "greet": "some generic statement",
+  "sum": 10,
+  "array": ["a", 1],
+  "obj": { "some": "any", "other": 1 }
+}
