@@ -22,7 +22,7 @@ async function run() {
     if (req.url === '/json-stringify') {
       res.end(JSON.stringify(json));
     }
-    if (req.url === '/download-files') {
+    if (req.url === '/download-file') {
       createReadStream(filePath, { highWaterMark: 50000 }).pipe(res);
     }
     if (req.url === '/parse-xml') {
