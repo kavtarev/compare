@@ -19,7 +19,7 @@ func ClosureJson(name string) func(w http.ResponseWriter, req *http.Request) {
 		panic(jErr)
 	}
 
-	res := func(w http.ResponseWriter, req *http.Request) {
+	return func(w http.ResponseWriter, req *http.Request) {
 		mar, err := json.Marshal(myMap)
 		if err != nil {
 			panic("cant stringify")
@@ -27,6 +27,4 @@ func ClosureJson(name string) func(w http.ResponseWriter, req *http.Request) {
 
 		w.Write(mar)
 	}
-
-	return res
 }

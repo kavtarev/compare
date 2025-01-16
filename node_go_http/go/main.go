@@ -10,6 +10,11 @@ import (
 func main() {
 	fmt.Println(os.Getpid())
 
+	if len(os.Args) == 1 {
+		fmt.Println("should pass file type argument")
+		return
+	}
+
 	http.HandleFunc("/json-stringify", handlers.ClosureJson(os.Args[1]))
 	http.HandleFunc("/download-file", handlers.ClosureReadFileHandlerChunk(os.Args[1]))
 	http.HandleFunc("/parse-xml", handlers.ClosureXmlHandler(os.Args[1]))

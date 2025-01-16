@@ -8,7 +8,7 @@ import (
 )
 
 func ClosureReadFileHandlerChunk(name string) func(w http.ResponseWriter, req *http.Request) {
-	res := func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		const size = 50000
 
 		f, err := os.Open("../common/files/" + name + ".txt")
@@ -32,6 +32,4 @@ func ClosureReadFileHandlerChunk(name string) func(w http.ResponseWriter, req *h
 			w.Write(bytes[:bytesRead])
 		}
 	}
-
-	return res
 }
