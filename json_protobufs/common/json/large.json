@@ -1,0 +1,116 @@
+{
+  "string1": "Lorem ipsum, dolor sit1",
+  "string2": "Lorem ipsum, dolor sit2",
+  "string3": "Lorem ipsum, dolor sit3",
+  "int1": 1000000,
+  "int2": 2000000,
+  "int3": 3000000,
+  "bool1": false,
+  "bool2": false,
+  "bool3": false,
+  "small1": {
+    "string": "some generic statement1",
+    "int": 10,
+    "strings": ["a", "b"],
+    "bool": false
+  },
+  "small2": {
+    "string": "some generic statement2",
+    "int": 10,
+    "strings": ["a", "b"],
+    "bool": false
+  },
+  "small3": {
+    "string": "some generic statement3",
+    "int": 10,
+    "strings": ["a", "b"],
+    "bool": false
+  },
+  "medium1": {
+    "string1": "Lorem ipsum, dolor sit1",
+    "string2": "Lorem ipsum, dolor sit2",
+    "string3": "Lorem ipsum, dolor sit3",
+    "int1": 1000000,
+    "int2": 2000000,
+    "int3": 3000000,
+    "bool1": false,
+    "bool2": false,
+    "bool3": false,
+    "small1": {
+      "string": "some generic statement1",
+      "int": 10,
+      "strings": ["a", "b"],
+      "bool": false
+    },
+    "small2": {
+      "string": "some generic statement2",
+      "int": 10,
+      "strings": ["a", "b"],
+      "bool": false
+    },
+    "small3": {
+      "string": "some generic statement3",
+      "int": 10,
+      "strings": ["a", "b"],
+      "bool": false
+    }
+  },
+  "medium2": {
+    "string1": "Lorem ipsum, dolor sit1",
+    "string2": "Lorem ipsum, dolor sit2",
+    "string3": "Lorem ipsum, dolor sit3",
+    "int1": 1000000,
+    "int2": 2000000,
+    "int3": 3000000,
+    "bool1": false,
+    "bool2": false,
+    "bool3": false,
+    "small1": {
+      "string": "some generic statement1",
+      "int": 10,
+      "strings": ["a", "b"],
+      "bool": false
+    },
+    "small2": {
+      "string": "some generic statement2",
+      "int": 10,
+      "strings": ["a", "b"],
+      "bool": false
+    },
+    "small3": {
+      "string": "some generic statement3",
+      "int": 10,
+      "strings": ["a", "b"],
+      "bool": false
+    }
+  },
+  "medium3": {
+    "string1": "Lorem ipsum, dolor sit1",
+    "string2": "Lorem ipsum, dolor sit2",
+    "string3": "Lorem ipsum, dolor sit3",
+    "int1": 1000000,
+    "int2": 2000000,
+    "int3": 3000000,
+    "bool1": false,
+    "bool2": false,
+    "bool3": false,
+    "small1": {
+      "string": "some generic statement1",
+      "int": 10,
+      "strings": ["a", "b"],
+      "bool": false
+    },
+    "small2": {
+      "string": "some generic statement2",
+      "int": 10,
+      "strings": ["a", "b"],
+      "bool": false
+    },
+    "small3": {
+      "string": "some generic statement3",
+      "int": 10,
+      "strings": ["a", "b"],
+      "bool": false
+    }
+  }
+}

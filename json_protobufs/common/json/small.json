@@ -1,0 +1,6 @@
+{
+  "string": "some generic statement",
+  "int": 10,
+  "strings": ["a", "b"],
+  "bool": false
+}

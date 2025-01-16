@@ -1,13 +1,16 @@
 const { request, createServer } = require('http');
 const protobuf = require('protobufjs');
-const json_s = require('./json_examples')
+const fs = require('fs/promises');
+const path = require('path');
 
 async function run() {
   const { 2: type, 3: level, 4: amount } = process.argv;
 
   const root = await protobuf.load('example.proto')
   const buffer = root.lookupType(level)
-  const jsonObject = json_s[level]
+
+  const jsonData = await fs.readFile(path.join('..', 'common', 'json', `${level}.json`))
+  const jsonObject = JSON.parse(jsonData)
 
   createServer((req, res) => {
     const data = [];
