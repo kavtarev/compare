@@ -52,6 +52,7 @@ func main() {
 		panic(err)
 	}
 
+	time.Sleep(1 * time.Second)
 	makeRequests(os.Args[1], count, os.Args[3])
 }
 
@@ -74,7 +75,11 @@ func makeRequests(t string, count int, size string) {
 			if err != nil {
 				panic(err)
 			}
-			resp, err := http.Post("http://localhost:3000/default", "application/json", bytes.NewBuffer(m))
+			resp, err := http.Post(
+				"http://localhost:3000/default",
+				"application/json",
+				bytes.NewBuffer(m),
+			)
 			if err != nil {
 				panic(err)
 			}
@@ -90,7 +95,11 @@ func makeRequests(t string, count int, size string) {
 		if err != nil {
 			panic(err)
 		}
-		resp, err := http.Post("http://localhost:3000/proto", "application/octet-stream", bytes.NewBuffer(p))
+		resp, err := http.Post(
+			"http://localhost:3000/proto",
+			"application/octet-stream",
+			bytes.NewBuffer(p),
+		)
 		if err != nil {
 			panic(err)
 		}
