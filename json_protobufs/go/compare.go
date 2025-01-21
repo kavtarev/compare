@@ -13,7 +13,7 @@ import (
 
 var numOfRuns = 10000
 
-func main() {
+func compare() {
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: go run main.go <level>")
 	}
