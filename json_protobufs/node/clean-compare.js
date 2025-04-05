@@ -40,4 +40,4 @@ async function benchmarkSerialization() {
   console.timeEnd('Protobuf Parse');
 }
 
-benchmarkSerialization();
+benchmarkSerialization().catch(e => console.log(e));
