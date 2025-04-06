@@ -3,7 +3,8 @@ syntax = "proto3";
 package example;
 
 service ExampleService {
-  rpc GetData (DataRequest) returns (DataResponse);
+  rpc DataTiny (DataRequest) returns (DataResponse);
+  rpc DataMedium (ListMedium) returns (ListMediumResponse);
 }
 
 message DataRequest {
@@ -12,4 +13,41 @@ message DataRequest {
 
 message DataResponse {
   string data = 1;
+}
+
+message ListMedium {
+  int32 page = 1; 
+  int32 limit = 2; 
+  orderEnum orderBy = 3; 
+  string q = 4; 
+  bool asc = 5; 
+}
+
+
+enum orderEnum {
+  vin = 0; 
+  toDate = 1; 
+  fromDate = 2; 
+  name = 3; 
+  authorFio = 4; 
+}
+
+
+message ListMediumResponse {
+  int32 page = 1; 
+  bool hasNextPage = 2; 
+  repeated ListMediumData data = 3; 
+}
+
+
+message ListMediumData {
+  string exclusionId = 1; 
+  string name = 2; 
+  string vin = 3; 
+  string leasingSubjectId = 4; 
+  string authorId = 5; 
+  string authorFio = 6; 
+  string fromDate = 7; 
+  string toDate = 8; 
+  bool isActive = 9; 
 }

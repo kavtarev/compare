@@ -16,16 +16,22 @@ importers:
         version: 0.7.13
       '@nestjs/common':
         specifier: ^11.0.13
-        version: 11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2)
+        version: 11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/core':
         specifier: ^11.0.13
-        version: 11.0.13(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@11.0.13)(@nestjs/platform-express@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+        version: 11.0.13(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@11.0.13)(@nestjs/platform-express@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/microservices':
         specifier: ^11.0.13
-        version: 11.0.13(@grpc/grpc-js@1.13.2)(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+        version: 11.0.13(@grpc/grpc-js@1.13.2)(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/platform-express':
         specifier: ^11.0.13
-        version: 11.0.13(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)
+        version: 11.0.13(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)
+      class-transformer:
+        specifier: 0.5.1
+        version: 0.5.1
+      class-validator:
+        specifier: 0.14.1
+        version: 0.14.1
       grpc:
         specifier: ^1.24.11
         version: 1.24.11
@@ -185,6 +191,9 @@ packages:
   '@types/source-map-support@0.5.10':
     resolution: {integrity: sha512-tgVP2H469x9zq34Z0m/fgPewGhg/MLClalNOiPIzQlXrSS2YrKu/xCdSCKnEDwkFha51VKEKB6A9wW26/ZNwzA==}
 
+  '@types/validator@13.12.3':
+    resolution: {integrity: sha512-2ipwZ2NydGQJImne+FhNdhgRM37e9lCev99KnqkbFHd94Xn/mErARWI1RSLem1QA19ch5kOhzIZd7e8CA2FI8g==}
+
   abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
 
@@ -262,6 +271,12 @@ packages:
   chownr@2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
+
+  class-transformer@0.5.1:
+    resolution: {integrity: sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==}
+
+  class-validator@0.14.1:
+    resolution: {integrity: sha512-2VEG9JICxIqTpoK1eMzZqaV+u/EiwEJkMGzTrZf6sU/fwsnOITVgYJ8yojSy6CaXtO9V0Cc6ZQZ8h8m4UBuLwQ==}
 
   cliui@3.2.0:
     resolution: {integrity: sha512-0yayqDxWQbqk3ojkYqUKqaAQ6AfNKeKWRNA8kR0WXzAsdHpP4BIaOmMAG87JGuO6qcobyW4GjxHd9PmhEd+T9w==}
@@ -505,6 +520,9 @@ packages:
   lcid@1.0.0:
     resolution: {integrity: sha512-YiGkH6EnGrDGqLMITnGjXtGmNtjoXw9SVUzcaos8RBi7Ps0VBylkq+vOcY9QE5poLasPCR849ucFUkl0UzUyOw==}
     engines: {node: '>=0.10.0'}
+
+  libphonenumber-js@1.12.6:
+    resolution: {integrity: sha512-PJiS4ETaUfCOFLpmtKzAbqZQjCCKVu2OhTV4SVNNE7c2nu/dACvtCqj4L0i/KWNnIgRv7yrILvBj5Lonv5Ncxw==}
 
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
@@ -831,6 +849,10 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
+  validator@13.15.0:
+    resolution: {integrity: sha512-36B2ryl4+oL5QxZ3AzD0t5SsMNGvTtQHpjgFO5tbNxfXbMFkY822ktCDe1MnlqV3301QQI9SLHDNJokDI+Z9pA==}
+    engines: {node: '>= 0.10'}
+
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
@@ -918,17 +940,20 @@ snapshots:
       - encoding
       - supports-color
 
-  '@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2)':
+  '@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)':
     dependencies:
       iterare: 1.2.1
       reflect-metadata: 0.2.2
       rxjs: 7.8.2
       tslib: 2.8.1
       uid: 2.0.2
+    optionalDependencies:
+      class-transformer: 0.5.1
+      class-validator: 0.14.1
 
-  '@nestjs/core@11.0.13(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@11.0.13)(@nestjs/platform-express@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)':
+  '@nestjs/core@11.0.13(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@11.0.13)(@nestjs/platform-express@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)':
     dependencies:
-      '@nestjs/common': 11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/common': 11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nuxt/opencollective': 0.4.1
       fast-safe-stringify: 2.1.1
       iterare: 1.2.1
@@ -938,13 +963,13 @@ snapshots:
       tslib: 2.8.1
       uid: 2.0.2
     optionalDependencies:
-      '@nestjs/microservices': 11.0.13(@grpc/grpc-js@1.13.2)(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
-      '@nestjs/platform-express': 11.0.13(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)
+      '@nestjs/microservices': 11.0.13(@grpc/grpc-js@1.13.2)(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/platform-express': 11.0.13(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)
 
-  '@nestjs/microservices@11.0.13(@grpc/grpc-js@1.13.2)(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)':
+  '@nestjs/microservices@11.0.13(@grpc/grpc-js@1.13.2)(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)':
     dependencies:
-      '@nestjs/common': 11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2)
-      '@nestjs/core': 11.0.13(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@11.0.13)(@nestjs/platform-express@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/common': 11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/core': 11.0.13(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@11.0.13)(@nestjs/platform-express@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       iterare: 1.2.1
       reflect-metadata: 0.2.2
       rxjs: 7.8.2
@@ -952,10 +977,10 @@ snapshots:
     optionalDependencies:
       '@grpc/grpc-js': 1.13.2
 
-  '@nestjs/platform-express@11.0.13(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)':
+  '@nestjs/platform-express@11.0.13(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.13)':
     dependencies:
-      '@nestjs/common': 11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2)
-      '@nestjs/core': 11.0.13(@nestjs/common@11.0.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@11.0.13)(@nestjs/platform-express@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/common': 11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/core': 11.0.13(@nestjs/common@11.0.13(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@11.0.13)(@nestjs/platform-express@11.0.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       cors: 2.8.5
       express: 5.1.0
       multer: 1.4.5-lts.2
@@ -1005,6 +1030,8 @@ snapshots:
   '@types/source-map-support@0.5.10':
     dependencies:
       source-map: 0.6.1
+
+  '@types/validator@13.12.3': {}
 
   abbrev@1.1.1: {}
 
@@ -1087,6 +1114,14 @@ snapshots:
   camelcase@2.1.1: {}
 
   chownr@2.0.0: {}
+
+  class-transformer@0.5.1: {}
+
+  class-validator@0.14.1:
+    dependencies:
+      '@types/validator': 13.12.3
+      libphonenumber-js: 1.12.6
+      validator: 13.15.0
 
   cliui@3.2.0:
     dependencies:
@@ -1345,6 +1380,8 @@ snapshots:
   lcid@1.0.0:
     dependencies:
       invert-kv: 1.0.0
+
+  libphonenumber-js@1.12.6: {}
 
   lodash.camelcase@4.3.0: {}
 
@@ -1679,6 +1716,8 @@ snapshots:
   unpipe@1.0.0: {}
 
   util-deprecate@1.0.2: {}
+
+  validator@13.15.0: {}
 
   vary@1.1.2: {}
 
