@@ -16,7 +16,7 @@ async function run() {
     const data = [];
     req.on('data', chunk => { data.push(chunk); });
 
-    if (req.url === '/default') {
+    if (req.url === '/json') {
       req.on('end', () => { JSON.parse(Buffer.concat(data)); });
     }
     if (req.url === '/proto') {
@@ -28,10 +28,10 @@ async function run() {
 
 
   function makeRequest(type) {
-    if (type === '1') {
+    if (type === 'json') {
       return new Promise((resolve, reject) => {
         const backReq = request(
-          { host: '127.0.0.1', port: 3000, method: 'POST', path: '/default' },
+          { host: '127.0.0.1', port: 3000, method: 'POST', path: '/json' },
           res => {
             const data = [];
             res.on('data', chunk => { data.push(chunk); });
@@ -44,7 +44,7 @@ async function run() {
         backReq.end();
       });
     }
-    if (type === '2') {
+    if (type === 'proto') {
       return new Promise((resolve, reject) => {
         const json = buffer.encode(jsonObject).finish()
 
@@ -65,14 +65,14 @@ async function run() {
   }
 
   async function runSequentialRequests() {
-    console.time('start')
+    console.time(`${amount} of ${type} took`)
     for (let i = 0; i < amount; i++) {
       await makeRequest(type);
     }
-    console.timeEnd('start')
+    console.timeEnd(`${amount} of ${type} took`)
   };
 
-  runSequentialRequests()
+  await runSequentialRequests()
 }
 
 run()
