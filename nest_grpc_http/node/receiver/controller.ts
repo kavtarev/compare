@@ -1,16 +1,15 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
+import { GrpcMethod } from "@nestjs/microservices";
 
 @Controller()
 export class ReceiverController {
   @Post("json")
   async executeJson(@Body() dto: any) {
-    console.log(dto);
-
-    return { some: "body" };
+    return { data: `json Data for ID: ${dto.id}` };
   }
 
-  @Get("grpc")
-  async executeGrpc() {
-    return "grpc";
+  @GrpcMethod("ExampleService", "GetData")
+  getData(data: { id: string }): { data: string } {
+    return { data: `grpc Data for ID: ${data.id}` };
   }
 }
