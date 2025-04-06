@@ -1,0 +1,24 @@
+{
+  "name": "nest_grpc_http",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:sender": "nest build && node dist/sender/main.js",
+    "start:receiver": "nest build && node dist/receiver/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@nestjs/common": "^11.0.13",
+    "@nestjs/core": "^11.0.13",
+    "@nestjs/platform-express": "^11.0.13",
+    "reflect-metadata": "^0.2.2",
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/source-map-support": "^0.5.10"
+  }
+}
