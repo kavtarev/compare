@@ -44,6 +44,8 @@ export class ReceiverController {
 
   @GrpcMethod("ExampleService", "DataTiny")
   DataTiny(data: { id: string }): { data: string } {
+    console.log("in receiver ", data);
+
     return { data: `json Data for ID: ${data.id}` };
   }
 

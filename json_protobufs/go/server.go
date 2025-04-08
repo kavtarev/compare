@@ -20,6 +20,8 @@ func main() {
 	}
 
 	go func() {
+		compare()
+		return
 		mux := http.NewServeMux()
 		mux.HandleFunc("/default", func(w http.ResponseWriter, r *http.Request) {
 			b, err := io.ReadAll(r.Body)

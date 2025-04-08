@@ -37,7 +37,9 @@ export class SenderController implements OnModuleInit {
 
   @Post("grpc-tiny")
   async executeGrpcTiny(@Body() dto: any) {
-    return this.exampleService.DataTiny(dto);
+    console.log("in sendder");
+
+    return this.exampleService.DataTiny({ id: "12313", name: 890 } as any);
   }
 
   @Post("grpc-medium")
