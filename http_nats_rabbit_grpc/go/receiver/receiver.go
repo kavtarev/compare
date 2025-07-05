@@ -21,6 +21,5 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 }
 
 func HttpHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("some")
-	w.Write([]byte("hello"))
+	w.Write([]byte(""))
 }
