@@ -9,7 +9,7 @@ import (
 func JsonHandler(name string) func(w http.ResponseWriter, req *http.Request) {
 	file, err := os.ReadFile("../common/json/" + name + ".json")
 	if err != nil {
-		panic("no file found")
+		panic("no file founded")
 	}
 
 	var myMap map[string]any
