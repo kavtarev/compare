@@ -1,9 +1,19 @@
 package main
 
 import (
+	"fmt"
+	"http_nats_rabbit_grpc/receiver"
 	"http_nats_rabbit_grpc/sender"
 )
 
 func main() {
-	sender.StartServer(sender.SenderServerOpts{Port: ":3000"})
+	ch := make(chan int)
+	fmt.Println("before servers")
+
+	go sender.StartServerSender(sender.SenderServerOpts{Port: ":3000"})
+	go receiver.StartServerReceiver(receiver.ReceiverServerOpts{Port: ":3001"})
+
+	fmt.Println("after servers")
+
+	<-ch
 }

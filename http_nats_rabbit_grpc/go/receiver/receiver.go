@@ -1,19 +1,19 @@
-package sender
+package receiver
 
 import (
 	"fmt"
 	"net/http"
 )
 
-type SenderServerOpts struct {
+type ReceiverServerOpts struct {
 	Port string
 }
 
-func StartServerSender(opts SenderServerOpts) {
+func StartServerReceiver(opts ReceiverServerOpts) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/http", HttpHandler)
 
-	fmt.Println("sender before ListenAndServe")
+	fmt.Println("receiver before ListenAndServe")
 	err := http.ListenAndServe(opts.Port, mux)
 	if err != nil {
 		panic(err)
