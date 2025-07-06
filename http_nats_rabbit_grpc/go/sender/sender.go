@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"http_nats_rabbit_grpc/rabbit"
-	"io"
+	"http_nats_rabbit_grpc/types"
 	"net/http"
 
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -47,39 +47,18 @@ func StartServerSender(opts SenderServerOpts) {
 }
 
 func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("some")
 	for i := 0; i < s.opts.AmountOfObjects; i++ {
-		obj, err := json.Marshal(smallNumber{})
+		obj, err := json.Marshal(types.SmallNumber{})
 		if err != nil {
 			fmt.Println("cant marshal json")
 		}
-		_, err = http.Post("http://localhost:3001/http", "application/json", bytes.NewBuffer(obj))
+		res, err := http.Post("http://localhost:3001/http", "application/json", bytes.NewBuffer(obj))
 		if err != nil {
 			panic(err)
 		}
+		defer res.Body.Close()
+
 	}
 
-	obj, err := json.Marshal(smallNumber{})
-	if err != nil {
-		fmt.Println("cant marshal json")
-	}
-	res, err := http.Post("http://localhost:3001/http", "application/json", bytes.NewBuffer(obj))
-	if err != nil {
-		panic(err)
-	}
-	defer res.Body.Close()
-
-	var str smallNumber
-	d, err := io.ReadAll(res.Body)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(string(d))
-
-	err = json.Unmarshal(d, &str)
-	if err != nil {
-		fmt.Println("cant unmarshal")
-		panic(err)
-	}
 	w.Write([]byte("done"))
 }

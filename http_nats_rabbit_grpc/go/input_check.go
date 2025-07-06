@@ -5,6 +5,7 @@ import "fmt"
 type Input struct {
 	numOfRuns int
 	jsonSize  string
+	jsonType  string
 }
 
 func inputCheck() Input {
@@ -15,6 +16,9 @@ func inputCheck() Input {
 
 	fmt.Print("Enter json size \n")
 	fmt.Scanln(&input.jsonSize)
+
+	fmt.Print("Enter json type \n")
+	fmt.Scanln(&input.jsonType)
 
 	return input
 }

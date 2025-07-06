@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"http_nats_rabbit_grpc/rabbit"
+	"http_nats_rabbit_grpc/types"
 	"io"
 	"log"
 	"net/http"
@@ -51,23 +52,17 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 }
 
 func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("content-type", "application/json")
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		panic(err)
 	}
-	type smallNumber struct {
-		One   int8
-		Two   int
-		Three float32
-		Four  float64
-	}
 
-	var v smallNumber
+	var v types.SmallNumber
 	err = json.Unmarshal(body, &v)
 	if err != nil {
 		fmt.Println("cant unmarshal")
 	}
 
+	w.Header().Add("content-type", "application/json")
 	w.Write(body)
 }
