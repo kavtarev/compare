@@ -1,14 +1,20 @@
 package receiver
 
 import (
+	"encoding/json"
 	"fmt"
 	"http_nats_rabbit_grpc/rabbit"
+	"io"
 	"log"
 	"net/http"
 )
 
 type ReceiverServerOpts struct {
 	Port string
+}
+
+type Server struct {
+	opts ReceiverServerOpts
 }
 
 func StartServerReceiver(opts ReceiverServerOpts) {
@@ -32,8 +38,10 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 		}
 	}()
 
+	server := Server{opts: opts}
+
 	mux := http.NewServeMux()
-	mux.HandleFunc("/http", HttpHandler)
+	mux.HandleFunc("/http", server.HttpHandler)
 
 	fmt.Println("receiver before ListenAndServe")
 	err = http.ListenAndServe(opts.Port, mux)
@@ -42,6 +50,24 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 	}
 }
 
-func HttpHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(""))
+func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("content-type", "application/json")
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		panic(err)
+	}
+	type smallNumber struct {
+		One   int8
+		Two   int
+		Three float32
+		Four  float64
+	}
+
+	var v smallNumber
+	err = json.Unmarshal(body, &v)
+	if err != nil {
+		fmt.Println("cant unmarshal")
+	}
+
+	w.Write(body)
 }
