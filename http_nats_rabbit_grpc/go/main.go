@@ -10,6 +10,9 @@ func main() {
 	ch := make(chan int)
 	fmt.Println("before servers")
 
+	input := inputCheck()
+	fmt.Printf("%+v", input)
+
 	go sender.StartServerSender(sender.SenderServerOpts{Port: ":3000"})
 	go receiver.StartServerReceiver(receiver.ReceiverServerOpts{Port: ":3001"})
 
