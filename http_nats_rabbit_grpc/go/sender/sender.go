@@ -25,17 +25,12 @@ type Server struct {
 
 func StartServerSender(opts SenderServerOpts) {
 	ch := rabbit.ConnectToRabbit()
-
-	server := Server{
-		ch:   ch,
-		opts: opts,
-	}
-
+	server := Server{ch: ch, opts: opts}
 	mux := http.NewServeMux()
+
 	mux.HandleFunc("/http", server.HttpHandler)
 	mux.HandleFunc("/rabbit", server.RabbitHandler)
 
-	fmt.Println("sender before ListenAndServe")
 	err := http.ListenAndServe(opts.Port, mux)
 	if err != nil {
 		panic(err)

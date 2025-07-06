@@ -11,7 +11,6 @@ func main() {
 	fmt.Println("before servers")
 
 	input := inputCheck()
-	fmt.Printf("%+v", input)
 
 	go sender.StartServerSender(sender.SenderServerOpts{
 		Port:            ":3000",
