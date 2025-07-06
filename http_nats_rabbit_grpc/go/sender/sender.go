@@ -2,10 +2,9 @@ package sender
 
 import (
 	"fmt"
-	"log"
-	"net/http"
-
 	amqp "github.com/rabbitmq/amqp091-go"
+	"http_nats_rabbit_grpc/rabbit"
+	"net/http"
 )
 
 type SenderServerOpts struct {
@@ -13,21 +12,12 @@ type SenderServerOpts struct {
 }
 
 func StartServerSender(opts SenderServerOpts) {
-	conn, err := amqp.Dial("amqp://user:pass@localhost:5672")
-	failOnError(err, "Failed to connect to RabbitMQ")
+	ch := rabbit.ConnectToRabbit()
 
-	defer conn.Close()
-
-	ch, err := conn.Channel()
-	failOnError(err, "Cant obtain channel")
-
-	err = ch.ExchangeDeclare("default", "direct", false, false, false, false, nil)
-	failOnError(err, "Cant create exchange")
-
-	_, err = ch.QueueDeclare("default", false, false, false, false, nil)
-	failOnError(err, "Cant create queue")
-
-	fmt.Println(conn)
+	err := ch.Publish("default_exchange", "default_queue", false, false, amqp.Publishing{Type: "application/json", Body: []byte("sender")})
+	if err != nil {
+		panic("sender cant publish")
+	}
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/http", HttpHandler)
@@ -42,10 +32,4 @@ func StartServerSender(opts SenderServerOpts) {
 func HttpHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("some")
 	w.Write([]byte("hello"))
-}
-
-func failOnError(err error, msg string) {
-	if err != nil {
-		log.Panicf("%s: %s", msg, err)
-	}
 }
