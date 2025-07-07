@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/nats-io/nats.go"
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
@@ -23,9 +24,16 @@ type Server struct {
 	opts      ReceiverServerOpts
 	ch        *amqp.Channel
 	totalTime time.Duration
+	nc        *nats.Conn
 }
 
 func StartServerReceiver(opts ReceiverServerOpts) {
+	nc, err := nats.Connect(nats.DefaultURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer nc.Close()
+
 	ch := rabbit.ConnectToRabbit()
 	msgs, err := ch.Consume(
 		"default_queue", // queue
@@ -39,8 +47,21 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 	if err != nil {
 		panic(err)
 	}
-	server := Server{opts: opts, ch: ch}
+	server := Server{opts: opts, ch: ch, nc: nc}
 	mux := http.NewServeMux()
+
+	nc.Subscribe("init", func(m *nats.Msg) {
+		into := server.GetStructByInput()
+		start := time.Now()
+
+		err = json.Unmarshal(m.Data, &into)
+		if err != nil {
+			fmt.Println("cant unmarshal")
+		}
+		server.totalTime += time.Since(start)
+
+		m.Respond([]byte("answer is 42"))
+	})
 
 	go func() {
 		for d := range msgs {

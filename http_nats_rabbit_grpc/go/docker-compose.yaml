@@ -9,3 +9,13 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: pass
+
+  nats:
+    image: 'bitnami/nats:latest'
+    restart: unless-stopped
+    ports:
+      - '4222:4222'
+      - '6222:6222'
+      - '8222:8222'
+    volumes:
+      - ./deploy/nats/nats-server.conf:/bitnami/nats/conf/nats-server.conf:ro

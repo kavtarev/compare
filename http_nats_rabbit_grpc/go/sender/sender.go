@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"http_nats_rabbit_grpc/rabbit"
 	"http_nats_rabbit_grpc/types"
+	"log"
 	"net/http"
 
+	"github.com/nats-io/nats.go"
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
@@ -20,17 +22,25 @@ type SenderServerOpts struct {
 type Server struct {
 	opts SenderServerOpts
 	ch   *amqp.Channel
+	nc   *nats.Conn
 }
 
 func StartServerSender(opts SenderServerOpts) {
+	nc, err := nats.Connect(nats.DefaultURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer nc.Close()
+
 	ch := rabbit.ConnectToRabbit()
-	server := Server{ch: ch, opts: opts}
+	server := Server{ch: ch, opts: opts, nc: nc}
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/http", server.HttpHandler)
 	mux.HandleFunc("/rabbit", server.RabbitHandler)
+	mux.HandleFunc("/nats", server.NatsHandler)
 
-	err := http.ListenAndServe(opts.Port, mux)
+	err = http.ListenAndServe(opts.Port, mux)
 	if err != nil {
 		panic(err)
 	}
@@ -65,6 +75,19 @@ func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 		defer res.Body.Close()
+	}
+
+	w.Write([]byte("done"))
+}
+
+func (s *Server) NatsHandler(w http.ResponseWriter, r *http.Request) {
+	input := s.GetStructByInput()
+	for i := 0; i < s.opts.AmountOfObjects; i++ {
+		obj, err := json.Marshal(input)
+		if err != nil {
+			fmt.Println("cant marshal json")
+		}
+		s.nc.Publish("init", obj)
 	}
 
 	w.Write([]byte("done"))
