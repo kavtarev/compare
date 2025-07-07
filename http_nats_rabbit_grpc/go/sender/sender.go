@@ -15,7 +15,6 @@ type SenderServerOpts struct {
 	Port            string
 	AmountOfObjects int
 	TypeOfObjects   string
-	SizeOfObjects   string
 }
 
 type Server struct {
@@ -38,8 +37,9 @@ func StartServerSender(opts SenderServerOpts) {
 }
 
 func (s *Server) RabbitHandler(w http.ResponseWriter, r *http.Request) {
+	input := s.GetStructByInput()
 	for i := 0; i < s.opts.AmountOfObjects; i++ {
-		obj, err := json.Marshal(types.SmallNumber{})
+		obj, err := json.Marshal(input)
 		if err != nil {
 			fmt.Println("cant marshal json")
 		}
@@ -54,8 +54,9 @@ func (s *Server) RabbitHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
+	input := s.GetStructByInput()
 	for i := 0; i < s.opts.AmountOfObjects; i++ {
-		obj, err := json.Marshal(types.SmallNumber{})
+		obj, err := json.Marshal(input)
 		if err != nil {
 			fmt.Println("cant marshal json")
 		}
@@ -67,4 +68,30 @@ func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte("done"))
+}
+
+func (s *Server) GetStructByInput() any {
+	switch s.opts.TypeOfObjects {
+	case "s-number":
+		return types.SmallNumber{}
+	case "s-string":
+		return types.SmallString{}
+	case "s-mixed":
+		return types.SmallMixed{}
+	case "m-number":
+		return types.MediumNumber{}
+	case "m-string":
+		return types.MediumString{}
+	case "m-mixed":
+		return types.MediumMixed{}
+	case "l-number":
+		return types.LargeNumber{}
+	case "l-string":
+		return types.LargeString{}
+	case "l-mixed":
+		return types.LargeMixed{}
+	default:
+		fmt.Println(s.opts.TypeOfObjects)
+		panic("invalid type sender")
+	}
 }

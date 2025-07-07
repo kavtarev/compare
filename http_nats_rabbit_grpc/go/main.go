@@ -11,13 +11,17 @@ func main() {
 	fmt.Println("before servers")
 
 	input := inputCheck()
+	fmt.Printf("%+v", input)
 
 	go sender.StartServerSender(sender.SenderServerOpts{
 		Port:            ":3000",
 		AmountOfObjects: input.numOfRuns,
 		TypeOfObjects:   input.jsonType,
-		SizeOfObjects:   input.jsonSize})
-	go receiver.StartServerReceiver(receiver.ReceiverServerOpts{Port: ":3001"})
+	})
+	go receiver.StartServerReceiver(receiver.ReceiverServerOpts{
+		Port:          ":3001",
+		TypeOfObjects: input.jsonType,
+	})
 
 	fmt.Println("after servers")
 

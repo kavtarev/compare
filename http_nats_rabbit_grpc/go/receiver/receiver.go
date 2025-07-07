@@ -15,7 +15,8 @@ import (
 )
 
 type ReceiverServerOpts struct {
-	Port string
+	Port          string
+	TypeOfObjects string
 }
 
 type Server struct {
@@ -44,8 +45,8 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 	go func() {
 		for d := range msgs {
 			start := time.Now()
-			var v types.SmallNumber
-			err = json.Unmarshal(d.Body, &v)
+			into := server.GetStructByInput()
+			err = json.Unmarshal(d.Body, &into)
 			if err != nil {
 				fmt.Println("cant unmarshal")
 			}
@@ -72,8 +73,8 @@ func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	var v types.SmallNumber
-	err = json.Unmarshal(body, &v)
+	into := s.GetStructByInput()
+	err = json.Unmarshal(body, &into)
 	if err != nil {
 		fmt.Println("cant unmarshal")
 	}
@@ -91,4 +92,29 @@ func (s *Server) ShowTotalTimeHandler(w http.ResponseWriter, r *http.Request) {
 func (s *Server) ResetTimerHandler(w http.ResponseWriter, r *http.Request) {
 	s.totalTime = 0
 	w.Write([]byte("reset to 0"))
+}
+
+func (s *Server) GetStructByInput() any {
+	switch s.opts.TypeOfObjects {
+	case "s-number":
+		return types.SmallNumber{}
+	case "s-string":
+		return types.SmallString{}
+	case "s-mixed":
+		return types.SmallMixed{}
+	case "m-number":
+		return types.MediumNumber{}
+	case "m-string":
+		return types.MediumString{}
+	case "m-mixed":
+		return types.MediumMixed{}
+	case "l-number":
+		return types.LargeNumber{}
+	case "l-string":
+		return types.LargeString{}
+	case "l-mixed":
+		return types.LargeMixed{}
+	default:
+		panic("invalid type")
+	}
 }
