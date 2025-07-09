@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 type Input struct {
 	numOfRuns int
@@ -15,6 +19,19 @@ func inputCheck() Input {
 
 	fmt.Print("Enter json type \n")
 	fmt.Scanln(&input.jsonType)
+
+	return input
+}
+
+func inputCheckBuffio() Input {
+	var input Input
+
+	r := bufio.NewScanner(os.Stdin)
+
+	for r.Scan() {
+		d := r.Text()
+		fmt.Println(d)
+	}
 
 	return input
 }
