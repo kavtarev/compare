@@ -1,9 +1,7 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 )
 
 type Input struct {
@@ -22,18 +20,3 @@ func inputCheck() Input {
 
 	return input
 }
-
-func inputCheckBuffio() Input {
-	var input Input
-
-	r := bufio.NewScanner(os.Stdin)
-
-	for r.Scan() {
-		d := r.Text()
-		fmt.Println(d)
-	}
-
-	return input
-}
-
-// TODO buffio

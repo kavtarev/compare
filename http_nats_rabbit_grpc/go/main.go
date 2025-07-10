@@ -10,8 +10,6 @@ func main() {
 	ch := make(chan int)
 	fmt.Println("before servers")
 
-	inputCheckBuffio()
-
 	input := inputCheck()
 	fmt.Printf("%+v", input)
 
