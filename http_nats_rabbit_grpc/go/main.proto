@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package grpc;
+
+// Укажите путь к пакету Go, где будут сгенерированы файлы
+option go_package = "./grpc";
+
+service SenderService {
+    rpc SendData (SmallNumber) returns (DataResponse);
+}
+
+service ReceiverService {
+    rpc ReceiveData (SmallNumber) returns (DataResponse);
+}
+
+message DataResponse {
+    string message = 1;
+}
+
+message SmallNumber {
+    int32 one = 1;        // Используем int32 вместо int8
+    int32 two = 2;        // Используем int32 вместо int
+    float three = 3; // Используем float вместо float32
+    double four = 4;      // Используем double вместо float64
+}
+
+message SmallString {
+    string one = 1;
+    string two = 2;
+    string three = 3;
+    string four = 4;
+}
+
+message SmallMixed {
+    int32 one = 1;        // Используем int32 вместо int
+    string two = 2;
+    bool three = 3;
+    repeated string four = 4; // Используем repeated для массива строк
+}
+
+message MediumNumber {
+    SmallNumber one = 1;
+    SmallNumber two = 2;
+    SmallNumber three = 3;
+    SmallNumber four = 4;
+}
+
+message MediumString {
+    SmallString one = 1;
+    SmallString two = 2;
+    SmallString three = 3;
+    SmallString four = 4;
+}
+
+message MediumMixed {
+    SmallMixed one = 1;
+    SmallMixed two = 2;
+    SmallMixed three = 3;
+    SmallMixed four = 4;
+}
+
+message LargeNumber {
+    MediumNumber one = 1;
+    MediumNumber two = 2;
+    MediumNumber three = 3;
+    MediumNumber four = 4;
+}
+
+message LargeString {
+    MediumString one = 1;
+    MediumString two = 2;
+    MediumString three = 3;
+    MediumString four = 4;
+}
+
+message LargeMixed {
+    MediumMixed one = 1;
+    MediumMixed two = 2;
+    MediumMixed three = 3;
+    MediumMixed four = 4;
+}

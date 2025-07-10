@@ -1,11 +1,15 @@
 package receiver
 
 import (
+	"net"
 	"net/http"
 	"time"
 
+	pb "http_nats_rabbit_grpc/grpc"
+
 	"github.com/nats-io/nats.go"
 	amqp "github.com/rabbitmq/amqp091-go"
+	"google.golang.org/grpc"
 )
 
 type ReceiverServerOpts struct {
@@ -19,6 +23,7 @@ type Server struct {
 	totalTime time.Duration
 	nc        *nats.Conn
 	consumers map[string]<-chan amqp.Delivery
+	pb.UnimplementedSenderServiceServer
 }
 
 func StartServerReceiver(opts ReceiverServerOpts) {
@@ -32,11 +37,22 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 	server.InitializeNats()
 	server.NatsHandler()
 
+	grpcServer := grpc.NewServer()
+	pb.RegisterSenderServiceServer(grpcServer, &server)
+	lis, err := net.Listen("tcp", opts.Port)
+	if err != nil {
+		panic(err)
+	}
+
+	if err := grpcServer.Serve(lis); err != nil {
+		panic(err)
+	}
+
 	mux.HandleFunc("/http", server.HttpHandler)
 	mux.HandleFunc("/get-time", server.ShowTotalTimeHandler)
 	mux.HandleFunc("/reset-time", server.ResetTimerHandler)
 
-	err := http.ListenAndServe(opts.Port, mux)
+	err = http.ListenAndServe(opts.Port, mux)
 	if err != nil {
 		panic(err)
 	}
