@@ -2,7 +2,19 @@ package sender
 
 import (
 	"http_nats_rabbit_grpc/types"
+	"net/http"
+	"strconv"
 )
+
+func (s *Server) ShowTotalTimeHandler(w http.ResponseWriter, r *http.Request) {
+	totalTimeStr := strconv.FormatInt(s.totalTime.Microseconds(), 10)
+	w.Write([]byte(totalTimeStr))
+}
+
+func (s *Server) ResetTimerHandler(w http.ResponseWriter, r *http.Request) {
+	s.totalTime = 0
+	w.Write([]byte("reset to 0"))
+}
 
 func (s *Server) GetStructByInput() any {
 	switch s.opts.TypeOfObjects {

@@ -3,6 +3,7 @@ package sender
 import (
 	"http_nats_rabbit_grpc/rabbit"
 	"net/http"
+	"time"
 
 	pb "http_nats_rabbit_grpc/grpc"
 
@@ -22,6 +23,7 @@ type Server struct {
 	ch         *amqp.Channel
 	nc         *nats.Conn
 	grpcClient pb.SenderServiceClient
+	totalTime  time.Duration
 }
 
 func StartServerSender(opts SenderServerOpts) {
@@ -30,7 +32,7 @@ func StartServerSender(opts SenderServerOpts) {
 	server := Server{ch: ch, opts: opts}
 
 	// Подключение к gRPC серверу получателя
-	conn, err := grpc.NewClient("localhost:3001", grpc.WithInsecure())
+	conn, err := grpc.NewClient("localhost:3002", grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}
@@ -45,6 +47,9 @@ func StartServerSender(opts SenderServerOpts) {
 	mux.HandleFunc("/rabbit", server.RabbitHandler)
 	mux.HandleFunc("/nats", server.NatsHandler)
 	mux.HandleFunc("/grpc", server.GrpcHandler)
+
+	mux.HandleFunc("/get-time", server.ShowTotalTimeHandler)
+	mux.HandleFunc("/reset-time", server.ResetTimerHandler)
 
 	err = http.ListenAndServe(opts.Port, mux)
 	if err != nil {

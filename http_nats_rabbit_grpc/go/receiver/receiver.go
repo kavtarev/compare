@@ -36,23 +36,24 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 
 	server.InitializeNats()
 	server.NatsHandler()
+	go func() {
+		grpcServer := grpc.NewServer()
+		pb.RegisterSenderServiceServer(grpcServer, &server)
+		lis, err := net.Listen("tcp", ":3002")
+		if err != nil {
+			panic(err)
+		}
 
-	grpcServer := grpc.NewServer()
-	pb.RegisterSenderServiceServer(grpcServer, &server)
-	lis, err := net.Listen("tcp", opts.Port)
-	if err != nil {
-		panic(err)
-	}
-
-	if err := grpcServer.Serve(lis); err != nil {
-		panic(err)
-	}
+		if err := grpcServer.Serve(lis); err != nil {
+			panic(err)
+		}
+	}()
 
 	mux.HandleFunc("/http", server.HttpHandler)
 	mux.HandleFunc("/get-time", server.ShowTotalTimeHandler)
 	mux.HandleFunc("/reset-time", server.ResetTimerHandler)
 
-	err = http.ListenAndServe(opts.Port, mux)
+	err := http.ListenAndServe(opts.Port, mux)
 	if err != nil {
 		panic(err)
 	}

@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
 	input := s.GetStructByInput()
 	for i := 0; i < s.opts.AmountOfObjects; i++ {
+		start := time.Now()
 		obj, err := json.Marshal(input)
 		if err != nil {
 			fmt.Println("cant marshal json")
@@ -18,6 +20,7 @@ func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err)
 		}
+		s.totalTime += time.Since(start)
 		defer res.Body.Close()
 	}
 
