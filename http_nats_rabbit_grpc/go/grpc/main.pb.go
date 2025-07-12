@@ -731,11 +731,11 @@ const file_main_proto_rawDesc = "" +
 	"\x03one\x18\x01 \x01(\v2\x11.grpc.MediumMixedR\x03one\x12#\n" +
 	"\x03two\x18\x02 \x01(\v2\x11.grpc.MediumMixedR\x03two\x12'\n" +
 	"\x05three\x18\x03 \x01(\v2\x11.grpc.MediumMixedR\x05three\x12%\n" +
-	"\x04four\x18\x04 \x01(\v2\x11.grpc.MediumMixedR\x04four2B\n" +
-	"\rSenderService\x121\n" +
-	"\bSendData\x12\x11.grpc.SmallNumber\x1a\x12.grpc.DataResponse2G\n" +
-	"\x0fReceiverService\x124\n" +
-	"\vReceiveData\x12\x11.grpc.SmallNumber\x1a\x12.grpc.DataResponseB\bZ\x06./grpcb\x06proto3"
+	"\x04four\x18\x04 \x01(\v2\x11.grpc.MediumMixedR\x04four2A\n" +
+	"\rSenderService\x120\n" +
+	"\bSendData\x12\x10.grpc.LargeMixed\x1a\x12.grpc.DataResponse2F\n" +
+	"\x0fReceiverService\x123\n" +
+	"\vReceiveData\x12\x10.grpc.LargeMixed\x1a\x12.grpc.DataResponseB\bZ\x06./grpcb\x06proto3"
 
 var (
 	file_main_proto_rawDescOnce sync.Once
@@ -787,8 +787,8 @@ var file_main_proto_depIdxs = []int32{
 	6,  // 21: grpc.LargeMixed.two:type_name -> grpc.MediumMixed
 	6,  // 22: grpc.LargeMixed.three:type_name -> grpc.MediumMixed
 	6,  // 23: grpc.LargeMixed.four:type_name -> grpc.MediumMixed
-	1,  // 24: grpc.SenderService.SendData:input_type -> grpc.SmallNumber
-	1,  // 25: grpc.ReceiverService.ReceiveData:input_type -> grpc.SmallNumber
+	9,  // 24: grpc.SenderService.SendData:input_type -> grpc.LargeMixed
+	9,  // 25: grpc.ReceiverService.ReceiveData:input_type -> grpc.LargeMixed
 	0,  // 26: grpc.SenderService.SendData:output_type -> grpc.DataResponse
 	0,  // 27: grpc.ReceiverService.ReceiveData:output_type -> grpc.DataResponse
 	26, // [26:28] is the sub-list for method output_type

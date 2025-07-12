@@ -6,11 +6,11 @@ package grpc;
 option go_package = "./grpc";
 
 service SenderService {
-    rpc SendData (SmallNumber) returns (DataResponse);
+    rpc SendData (LargeMixed) returns (DataResponse);
 }
 
 service ReceiverService {
-    rpc ReceiveData (SmallNumber) returns (DataResponse);
+    rpc ReceiveData (LargeMixed) returns (DataResponse);
 }
 
 message DataResponse {

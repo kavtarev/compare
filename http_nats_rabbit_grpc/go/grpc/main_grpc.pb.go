@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SenderServiceClient interface {
-	SendData(ctx context.Context, in *SmallNumber, opts ...grpc.CallOption) (*DataResponse, error)
+	SendData(ctx context.Context, in *LargeMixed, opts ...grpc.CallOption) (*DataResponse, error)
 }
 
 type senderServiceClient struct {
@@ -37,7 +37,7 @@ func NewSenderServiceClient(cc grpc.ClientConnInterface) SenderServiceClient {
 	return &senderServiceClient{cc}
 }
 
-func (c *senderServiceClient) SendData(ctx context.Context, in *SmallNumber, opts ...grpc.CallOption) (*DataResponse, error) {
+func (c *senderServiceClient) SendData(ctx context.Context, in *LargeMixed, opts ...grpc.CallOption) (*DataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DataResponse)
 	err := c.cc.Invoke(ctx, SenderService_SendData_FullMethodName, in, out, cOpts...)
@@ -51,7 +51,7 @@ func (c *senderServiceClient) SendData(ctx context.Context, in *SmallNumber, opt
 // All implementations must embed UnimplementedSenderServiceServer
 // for forward compatibility.
 type SenderServiceServer interface {
-	SendData(context.Context, *SmallNumber) (*DataResponse, error)
+	SendData(context.Context, *LargeMixed) (*DataResponse, error)
 	mustEmbedUnimplementedSenderServiceServer()
 }
 
@@ -62,7 +62,7 @@ type SenderServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedSenderServiceServer struct{}
 
-func (UnimplementedSenderServiceServer) SendData(context.Context, *SmallNumber) (*DataResponse, error) {
+func (UnimplementedSenderServiceServer) SendData(context.Context, *LargeMixed) (*DataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendData not implemented")
 }
 func (UnimplementedSenderServiceServer) mustEmbedUnimplementedSenderServiceServer() {}
@@ -87,7 +87,7 @@ func RegisterSenderServiceServer(s grpc.ServiceRegistrar, srv SenderServiceServe
 }
 
 func _SenderService_SendData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SmallNumber)
+	in := new(LargeMixed)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ func _SenderService_SendData_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: SenderService_SendData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SenderServiceServer).SendData(ctx, req.(*SmallNumber))
+		return srv.(SenderServiceServer).SendData(ctx, req.(*LargeMixed))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -128,7 +128,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReceiverServiceClient interface {
-	ReceiveData(ctx context.Context, in *SmallNumber, opts ...grpc.CallOption) (*DataResponse, error)
+	ReceiveData(ctx context.Context, in *LargeMixed, opts ...grpc.CallOption) (*DataResponse, error)
 }
 
 type receiverServiceClient struct {
@@ -139,7 +139,7 @@ func NewReceiverServiceClient(cc grpc.ClientConnInterface) ReceiverServiceClient
 	return &receiverServiceClient{cc}
 }
 
-func (c *receiverServiceClient) ReceiveData(ctx context.Context, in *SmallNumber, opts ...grpc.CallOption) (*DataResponse, error) {
+func (c *receiverServiceClient) ReceiveData(ctx context.Context, in *LargeMixed, opts ...grpc.CallOption) (*DataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DataResponse)
 	err := c.cc.Invoke(ctx, ReceiverService_ReceiveData_FullMethodName, in, out, cOpts...)
@@ -153,7 +153,7 @@ func (c *receiverServiceClient) ReceiveData(ctx context.Context, in *SmallNumber
 // All implementations must embed UnimplementedReceiverServiceServer
 // for forward compatibility.
 type ReceiverServiceServer interface {
-	ReceiveData(context.Context, *SmallNumber) (*DataResponse, error)
+	ReceiveData(context.Context, *LargeMixed) (*DataResponse, error)
 	mustEmbedUnimplementedReceiverServiceServer()
 }
 
@@ -164,7 +164,7 @@ type ReceiverServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedReceiverServiceServer struct{}
 
-func (UnimplementedReceiverServiceServer) ReceiveData(context.Context, *SmallNumber) (*DataResponse, error) {
+func (UnimplementedReceiverServiceServer) ReceiveData(context.Context, *LargeMixed) (*DataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReceiveData not implemented")
 }
 func (UnimplementedReceiverServiceServer) mustEmbedUnimplementedReceiverServiceServer() {}
@@ -189,7 +189,7 @@ func RegisterReceiverServiceServer(s grpc.ServiceRegistrar, srv ReceiverServiceS
 }
 
 func _ReceiverService_ReceiveData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SmallNumber)
+	in := new(LargeMixed)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -201,7 +201,7 @@ func _ReceiverService_ReceiveData_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: ReceiverService_ReceiveData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReceiverServiceServer).ReceiveData(ctx, req.(*SmallNumber))
+		return srv.(ReceiverServiceServer).ReceiveData(ctx, req.(*LargeMixed))
 	}
 	return interceptor(ctx, in, info, handler)
 }
