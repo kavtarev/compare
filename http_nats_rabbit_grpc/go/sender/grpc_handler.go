@@ -9,6 +9,7 @@ import (
 )
 
 func (s *Server) GrpcHandler(w http.ResponseWriter, r *http.Request) {
+	s.startTime = time.Now()
 	for i := 0; i < s.opts.AmountOfObjects; i++ {
 		start := time.Now()
 		req := &pb.LargeMixed{}
@@ -17,6 +18,11 @@ func (s *Server) GrpcHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(err)
 			http.Error(w, "Failed to send data", http.StatusInternalServerError)
 			return
+		}
+		s.ReceivedObjects++
+		if s.ReceivedObjects == s.opts.AmountOfObjects {
+			s.endTime = time.Now()
+			fmt.Println("finally")
 		}
 		s.totalTime += time.Since(start)
 	}

@@ -21,11 +21,14 @@ type SenderServerOpts struct {
 }
 
 type Server struct {
-	opts       SenderServerOpts
-	ch         *amqp.Channel
-	nc         *nats.Conn
-	grpcClient pb.SenderServiceClient
-	totalTime  time.Duration
+	opts            SenderServerOpts
+	ch              *amqp.Channel
+	nc              *nats.Conn
+	grpcClient      pb.SenderServiceClient
+	totalTime       time.Duration
+	ReceivedObjects int
+	startTime       time.Time
+	endTime         time.Time
 }
 
 func StartServerSender(opts SenderServerOpts) {
@@ -51,6 +54,7 @@ func StartServerSender(opts SenderServerOpts) {
 	mux.HandleFunc("/grpc", server.GrpcHandler)
 
 	mux.HandleFunc("/get-time", server.ShowTotalTimeHandler)
+	mux.HandleFunc("/get-full-circle-time", server.ShowFullCircleTimeHandler)
 	mux.HandleFunc("/reset-time", server.ResetTimerHandler)
 
 	// Добавляем обработчики для pprof
