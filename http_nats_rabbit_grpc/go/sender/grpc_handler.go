@@ -12,8 +12,10 @@ func (s *Server) GrpcHandler(w http.ResponseWriter, r *http.Request) {
 	s.startTime = time.Now()
 	for i := 0; i < s.opts.AmountOfObjects; i++ {
 		start := time.Now()
-		req := &pb.LargeMixed{}
-		_, err := s.grpcClient.SendData(context.Background(), req)
+
+		ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
+		defer cancel()
+		_, err := s.grpcClient.SendData(ctx, &pb.LargeMixed{})
 		if err != nil {
 			fmt.Println(err)
 			http.Error(w, "Failed to send data", http.StatusInternalServerError)

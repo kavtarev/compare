@@ -2,7 +2,6 @@ package sender
 
 import (
 	"http_nats_rabbit_grpc/rabbit"
-	"log"
 	"net/http"
 	_ "net/http/pprof"
 	"time"
@@ -60,8 +59,6 @@ func StartServerSender(opts SenderServerOpts) {
 	// Добавляем обработчики для pprof
 	mux.Handle("/debug/pprof/", http.HandlerFunc(http.DefaultServeMux.ServeHTTP))
 
-	go func() {
-		log.Println(http.ListenAndServe(opts.Port, mux))
-	}()
+	http.ListenAndServe(opts.Port, mux)
 
 }
