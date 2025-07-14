@@ -2,7 +2,9 @@ package sender
 
 import (
 	"http_nats_rabbit_grpc/rabbit"
+	"log"
 	"net/http"
+	_ "net/http/pprof"
 	"time"
 
 	pb "http_nats_rabbit_grpc/grpc"
@@ -51,8 +53,11 @@ func StartServerSender(opts SenderServerOpts) {
 	mux.HandleFunc("/get-time", server.ShowTotalTimeHandler)
 	mux.HandleFunc("/reset-time", server.ResetTimerHandler)
 
-	err = http.ListenAndServe(opts.Port, mux)
-	if err != nil {
-		panic(err)
-	}
+	// Добавляем обработчики для pprof
+	mux.Handle("/debug/pprof/", http.HandlerFunc(http.DefaultServeMux.ServeHTTP))
+
+	go func() {
+		log.Println(http.ListenAndServe(opts.Port, mux))
+	}()
+
 }
