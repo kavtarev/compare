@@ -54,7 +54,6 @@ func StartServerSender(opts SenderServerOpts) {
 
 	mux.HandleFunc("/get-time", server.ShowTotalTimeHandler)
 	mux.HandleFunc("/get-full-circle-time", server.ShowFullCircleTimeHandler)
-	mux.HandleFunc("/reset-time", server.ResetTimerHandler)
 
 	// Добавляем обработчики для pprof
 	mux.Handle("/debug/pprof/", http.HandlerFunc(http.DefaultServeMux.ServeHTTP))

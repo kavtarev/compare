@@ -51,7 +51,6 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 
 	mux.HandleFunc("/http", server.HttpHandler)
 	mux.HandleFunc("/get-time", server.ShowTotalTimeHandler)
-	mux.HandleFunc("/reset-time", server.ResetTimerHandler)
 
 	err := http.ListenAndServe(opts.Port, mux)
 	if err != nil {

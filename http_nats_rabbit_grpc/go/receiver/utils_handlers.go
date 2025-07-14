@@ -8,12 +8,12 @@ import (
 
 func (s *Server) ShowTotalTimeHandler(w http.ResponseWriter, r *http.Request) {
 	totalTimeStr := strconv.FormatInt(s.totalTime.Microseconds(), 10)
+	s.Reset()
 	w.Write([]byte(totalTimeStr))
 }
 
-func (s *Server) ResetTimerHandler(w http.ResponseWriter, r *http.Request) {
+func (s *Server) Reset() {
 	s.totalTime = 0
-	w.Write([]byte("reset to 0"))
 }
 
 func (s *Server) GetStructByInput() any {
