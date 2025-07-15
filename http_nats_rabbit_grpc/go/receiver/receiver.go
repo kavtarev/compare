@@ -36,6 +36,7 @@ func StartServerReceiver(opts ReceiverServerOpts) {
 
 	server.InitializeNats()
 	server.NatsHandler()
+	server.NatsHandlerSync()
 	go func() {
 		grpcServer := grpc.NewServer()
 		pb.RegisterSenderServiceServer(grpcServer, &server)

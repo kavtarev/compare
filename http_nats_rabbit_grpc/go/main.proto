@@ -20,7 +20,7 @@ message DataResponse {
 message SmallNumber {
     int32 one = 1;        // Используем int32 вместо int8
     int32 two = 2;        // Используем int32 вместо int
-    float three = 3; // Используем float вместо float32
+    float three = 3;      // Используем float вместо float32
     double four = 4;      // Используем double вместо float64
 }
 

@@ -51,6 +51,7 @@ func StartServerSender(opts SenderServerOpts) {
 	mux.HandleFunc("/http", server.HttpHandler)
 	mux.HandleFunc("/rabbit", server.RabbitHandler)
 	mux.HandleFunc("/nats", server.NatsHandler)
+	mux.HandleFunc("/nats-sync", server.NatsHandlerSync)
 	mux.HandleFunc("/grpc", server.GrpcHandler)
 
 	mux.HandleFunc("/get-time", server.ShowTotalTimeHandler)
