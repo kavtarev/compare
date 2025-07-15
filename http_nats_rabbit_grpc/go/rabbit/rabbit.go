@@ -17,10 +17,16 @@ func ConnectToRabbit() *amqp.Channel {
 	failOnError(err, "Cant create exchange")
 
 	_, err = ch.QueueDeclare("default_queue", false, false, false, false, nil)
-	failOnError(err, "Cant create queue")
+	failOnError(err, "Cant create default_queue")
+
+	_, err = ch.QueueDeclare("default_queue_response", false, false, false, false, nil)
+	failOnError(err, "Cant create default_queue_response")
 
 	err = ch.QueueBind("default_queue", "default_queue", "default_exchange", false, nil)
-	failOnError(err, "Cant bind queue")
+	failOnError(err, "Cant bind default_queue")
+
+	err = ch.QueueBind("default_queue_response", "default_queue_response", "default_exchange", false, nil)
+	failOnError(err, "Cant bind default_queue_response")
 
 	return ch
 }

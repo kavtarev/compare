@@ -16,10 +16,8 @@ func (s *Server) RabbitHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("cant marshal json")
 		}
 
-		err = func() error {
-			_, err := s.ch.PublishWithDeferredConfirm("default_exchange", "default_queue", false, false, amqp.Publishing{Type: "application/json", Body: obj})
-			return err
-		}()
+		_, err = s.ch.PublishWithDeferredConfirm("default_exchange", "default_queue", false, false, amqp.Publishing{Type: "application/json", Body: obj})
+
 		if err != nil {
 			panic("sender cant publish")
 		}

@@ -28,6 +28,7 @@ type Server struct {
 	ReceivedObjects int
 	startTime       time.Time
 	endTime         time.Time
+	consumers       map[string]<-chan amqp.Delivery
 }
 
 func StartServerSender(opts SenderServerOpts) {
@@ -41,6 +42,7 @@ func StartServerSender(opts SenderServerOpts) {
 		panic(err)
 	}
 	defer conn.Close()
+	go server.RabbitHandlerReceiver()
 
 	server.grpcClient = pb.NewSenderServiceClient(conn)
 	server.InitializeNats()

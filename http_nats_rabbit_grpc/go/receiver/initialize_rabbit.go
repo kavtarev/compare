@@ -13,7 +13,7 @@ func (s *Server) InitializeRabbit() {
 	msgs, err := s.ch.Consume(
 		"default_queue", // queue
 		"",              // consumer
-		true,            // auto-ack
+		false,           // auto-ack
 		false,           // exclusive
 		false,           // no-local
 		false,           // no-wait
