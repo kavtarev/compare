@@ -29,6 +29,7 @@ func (s *Server) RabbitHandler() {
 		if err != nil {
 			panic("receiver cant publish")
 		}
+		d.Ack(false)
 		log.Printf("Received a message: %s", d.Body)
 	}
 }
