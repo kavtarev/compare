@@ -24,5 +24,5 @@ func (s *Server) InitializeRabbit() {
 	}
 	s.consumers = make(map[string]<-chan amqp091.Delivery)
 
-	s.consumers["default_response"] = msgs
+	s.consumers["default_queue_response"] = msgs
 }

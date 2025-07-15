@@ -3,14 +3,13 @@ package receiver
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 func (s *Server) RabbitHandler() {
-	msgs := s.consumers["default"]
+	msgs := s.consumers["default_queue"]
 	for d := range msgs {
 		start := time.Now()
 		into := s.GetStructByInput()
@@ -30,6 +29,5 @@ func (s *Server) RabbitHandler() {
 			panic("receiver cant publish")
 		}
 		d.Ack(false)
-		log.Printf("Received a message: %s", d.Body)
 	}
 }

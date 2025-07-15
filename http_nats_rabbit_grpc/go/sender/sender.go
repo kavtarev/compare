@@ -1,7 +1,6 @@
 package sender
 
 import (
-	"http_nats_rabbit_grpc/rabbit"
 	"net/http"
 	_ "net/http/pprof"
 	"time"
@@ -33,8 +32,8 @@ type Server struct {
 
 func StartServerSender(opts SenderServerOpts) {
 
-	ch := rabbit.ConnectToRabbit()
-	server := Server{ch: ch, opts: opts}
+	server := Server{opts: opts}
+	server.InitializeRabbit()
 
 	// Подключение к gRPC серверу получателя
 	conn, err := grpc.NewClient("localhost:3002", grpc.WithInsecure())

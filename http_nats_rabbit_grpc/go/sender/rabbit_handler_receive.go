@@ -8,7 +8,7 @@ import (
 )
 
 func (s *Server) RabbitHandlerReceiver() {
-	msgs := s.consumers["default"]
+	msgs := s.consumers["default_queue_response"]
 	for d := range msgs {
 		s.ReceivedObjects++
 		if s.ReceivedObjects == 1 {
