@@ -30,3 +30,17 @@ func (s *Server) GrpcHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintf(w, "Response from receiver: %s")
 }
+
+func (s *Server) GrpcHandlerAutoCannon(w http.ResponseWriter, r *http.Request) {
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
+	defer cancel()
+	_, err := s.grpcClient.SendData(ctx, &pb.LargeMixed{})
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w, "Failed to send data", http.StatusInternalServerError)
+		return
+	}
+
+	w.Write([]byte("done"))
+}

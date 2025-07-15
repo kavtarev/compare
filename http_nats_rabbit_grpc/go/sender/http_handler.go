@@ -33,3 +33,20 @@ func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Write([]byte("done"))
 }
+
+func (s *Server) HttpHandlerAutoCannon(w http.ResponseWriter, r *http.Request) {
+	input := s.GetStructByInput()
+
+	obj, err := json.Marshal(input)
+	if err != nil {
+		fmt.Println("cant marshal json")
+	}
+
+	res, err := http.Post("http://localhost:3001/http", "application/json", bytes.NewBuffer(obj))
+	if err != nil {
+		panic(err)
+	}
+	defer res.Body.Close()
+
+	w.Write([]byte("done"))
+}
