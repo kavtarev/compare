@@ -11,19 +11,20 @@ func main() {
 	fmt.Println("before servers")
 
 	input := inputCheck()
-	fmt.Printf("%+v", input)
+	senderPort := ":3000"
+	receiverPort := ":3001"
 
 	go sender.StartServerSender(sender.SenderServerOpts{
-		Port:            ":3000",
+		Port:            senderPort,
 		AmountOfObjects: input.numOfRuns,
 		TypeOfObjects:   input.jsonType,
 	})
 	go receiver.StartServerReceiver(receiver.ReceiverServerOpts{
-		Port:          ":3001",
+		Port:          receiverPort,
 		TypeOfObjects: input.jsonType,
 	})
 
-	fmt.Println("after servers")
+	fmt.Printf("both servers are up on ports sender%v, receiver%v\n", senderPort, receiverPort)
 
 	<-ch
 }
