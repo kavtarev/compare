@@ -26,13 +26,11 @@ func (s *Server) NatsHandler() {
 func (s *Server) NatsHandlerSync() {
 	s.nc.Subscribe("sync", func(m *nats.Msg) {
 		into := s.GetStructByInput()
-		start := time.Now()
 
 		err := json.Unmarshal(m.Data, &into)
 		if err != nil {
 			fmt.Println("cant unmarshal")
 		}
-		s.totalTime += time.Since(start)
 
 		m.RespondMsg(m)
 	})

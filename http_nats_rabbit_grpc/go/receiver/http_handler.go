@@ -5,13 +5,11 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"time"
 
 	pb "http_nats_rabbit_grpc/grpc"
 )
 
 func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
-	start := time.Now()
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		panic(err)
@@ -22,7 +20,5 @@ func (s *Server) HttpHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("cant unmarshal")
 	}
 
-	s.totalTime += time.Since(start)
-	w.Header().Add("content-type", "application/json")
 	w.Write(body)
 }
